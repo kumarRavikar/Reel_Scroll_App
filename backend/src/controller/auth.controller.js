@@ -88,7 +88,7 @@ export async function logout(rerq, res){
 //Food partner registration field ---------------------//
 export async function foodPartnerRegistration(req, res){
    try {
-     const {name, email, password} = req.body;
+     const {businessName, email, password, contactName, phoneNo, address} = req.body;
      const isPartnerAlreadyReg = await foodPartnerModel.findOne({email})
      if(isPartnerAlreadyReg){
         return res.status(400).json({
@@ -97,9 +97,12 @@ export async function foodPartnerRegistration(req, res){
      }
      const hashedPassword = await bcrypt.hash(password,10)
      const foodPartner = await foodPartnerModel.create({
-         name,
+         businessName,
          email,
-         password:hashedPassword
+         password:hashedPassword,
+         contactName,
+         phoneNo,
+         address
      })
     const token = jwt.sign({_id:foodPartner._id},process.env.JWT_SECRET);
     res.cookie("token",token)
@@ -107,8 +110,10 @@ export async function foodPartnerRegistration(req, res){
      message:"Food Partner Registered successfully",
      foodPartner:{
          _id:foodPartner._id,
-         name:foodPartner.name,
-         email:foodPartner.email
+         businessName:foodPartner.businessName,
+         email:foodPartner.email,
+         address:foodPartner.address,
+         contactName:foodPartner.contactName
      }
     })
    } catch (error) {
