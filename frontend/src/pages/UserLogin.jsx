@@ -1,16 +1,23 @@
 import React from 'react'
 import AuthForm from '../components/AuthForm'
 import axios from 'axios'
+import {useNavigate} from 'react-router-dom'
 const UserLogin = () => {
+  const navigate = useNavigate();
   const handleSubmit = async(e) => {
     e.preventDefault(); 
     const email = e.target.email.value;
     const password = e.target.password.value;
-      await axios.post("http://localhost:3000/api/user/login",
-        {email,password},{
-          withCredentials:true
-        }
-      )
+     try {
+       await axios.post("http://localhost:3000/api/user/login",
+         {email,password},{
+           withCredentials:true
+         }
+       )
+       navigate('/home');
+     } catch (error) {
+        return alert(error.response?.data?.message || error.message) //see real backend error
+     }
   }
   return (
     <>
@@ -22,6 +29,7 @@ const UserLogin = () => {
     bottomText="Don't have an account?"
     bottomLinkText="Register"
     bottomLinkTo="/user/register"
+    onSubmit={handleSubmit}
   /></>
   )
 }

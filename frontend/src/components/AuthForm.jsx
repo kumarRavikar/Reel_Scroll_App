@@ -38,7 +38,7 @@ const AuthForm = ({
 
               <label className="auth-label">
                 <span>Contact Name</span>
-                <input type="text" placeholder="Contact person name" className="auth-input" />
+                <input type="text" placeholder="Contact person name" name='contactName' className="auth-input" />
               </label>
 
               <label className="auth-label">
