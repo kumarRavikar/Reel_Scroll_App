@@ -16,7 +16,7 @@ const PartnerLogin = () => {
        )
        alert("Food Partner Login successful!");
        e.target.reset();
-        navigate('/home');
+        navigate('/food-partner/create-food');
      }catch (error) {
         return alert(error.response?.data?.message || error.message) //see real backend error
      }

@@ -19,7 +19,7 @@ const PartnerRegister = () => {
      );
      alert("Food Partner Registration successful!");
       e.target.reset();
-       navigate("/food-partner/login");
+       navigate("/food-partner/create-food");
      } catch (error) {
        return alert(error.response?.data?.message || "Registration failed");
      }
