@@ -21,7 +21,7 @@ const AppRoutes = () => {
         <Route path="*" element={<Navigate to="/" replace />} /> 
         <Route path="/home" element={<Home />} />
         <Route path="/food-partner/create-food" element={<CreateFood/>} />
-        <Route path="/food-partner/:profile" element={<Profile />} />
+        <Route path="/food-partner/profile/:id" element={<Profile />} />
       </Routes>
     </BrowserRouter>
   )

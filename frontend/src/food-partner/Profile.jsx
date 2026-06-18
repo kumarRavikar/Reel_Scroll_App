@@ -1,11 +1,20 @@
-import React from 'react'
+import React ,{useState, useEffect} from 'react'
 import '../styles/profile.css'
-
+import axios from 'axios'
+import { useParams } from 'react-router-dom';
 const Profile = () => {
-  const videos = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9
-  ]
-
+  const {id} = useParams();
+  const [profile, setProfile] = useState(null);
+  const [videos, setVideos] = useState([]);
+  
+ useEffect(()=>{
+   axios.get(`http://localhost:3000/api/food-partner/profile/${id}`, {withCredentials: true}).then((res)=>{
+    setProfile(res.data.foodPartner)
+    setVideos(res.data.foodPartner.foodItems)
+   })
+ },[id])
+console.log("profile",profile)
+console.log("videos",videos)
   return (
     <div className="profile-page">
       <div className="container">
@@ -13,7 +22,7 @@ const Profile = () => {
           <div className="profile-top">
             <figure className="profile-avatar">
               <img
-                src="https://via.placeholder.com/160"
+                src={profile?.avatar || "profile image"}
                 alt="Business profile image"
                 width="160"
                 height="160"
@@ -21,20 +30,20 @@ const Profile = () => {
             </figure>
 
             <div className="profile-info">
-              <h1 className="business-name">Delish Bites</h1>
-              <p className="business-address">123 Food Street, Flavor Town</p>
+              <h1 className="business-name">{profile?.businessName}</h1>
+              <p className="business-address">{profile?.address}</p>
             </div>
           </div>
 
           <div className="profile-stats" aria-hidden="false">
             <div className="stat-card" role="region" aria-label="Total Meals">
               <span className="stat-label">Total Meals</span>
-              <span className="stat-value">1,254</span>
+              <span className="stat-value">{profile?.totalMeals || 1,254}</span>
             </div>
 
             <div className="stat-card" role="region" aria-label="Customers Served">
               <span className="stat-label">Customers Served</span>
-              <span className="stat-value">9,872</span>
+              <span className="stat-value">{profile?.customersServed || 9,872}</span>
             </div>
           </div>
         </header>
@@ -45,11 +54,12 @@ const Profile = () => {
 
             <div className="videos-grid">
               {videos.map((n) => (
-                <article className="video-thumb" key={n} tabIndex="0">
-                  <img
-                    src={`https://via.placeholder.com/600x400?text=Video+${n}`}
-                    alt={`Video thumbnail ${n}`}
-                    loading="lazy"
+                <article className="video-thumb" key={n._id} tabIndex="0">
+                  <video
+                    src={n.video}
+                    alt={`Video thumbnail ${n.name}`}
+                     autoPlay
+                      muted
                   />
                 </article>
               ))}

@@ -45,11 +45,9 @@ body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-s
 /* Videos Section */
 .videos-section{margin-top:1.25rem}
 .videos-section h2{margin:0 0 0.75rem 0;font-size:1rem}
-.videos-grid{display:grid;grid-template-columns:repeat(1,1fr);gap:0.6rem}
-.videos-grid.mobile-two-rows{grid-auto-rows:34vh}
-.video-thumb{background:var(--card);border-radius:10px;overflow:hidden;box-shadow:var(--shadow);transition:transform .18s ease,box-shadow .18s ease}
-.video-thumb.mobile-two-rows{min-height:34vh}
-.video-thumb img{width:100%;height:100%;display:block;object-fit:cover}
+.videos-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0.75rem}
+.video-thumb{background:var(--card);border-radius:10px;overflow:hidden;box-shadow:var(--shadow);transition:transform .18s ease,box-shadow .18s ease;min-height:220px;display:flex}
+.video-thumb video{width:100%;height:100%;object-fit:cover;display:block}
 .video-thumb:focus,.video-thumb:hover{transform:scale(1.02);box-shadow:0 20px 48px rgba(2,6,23,0.12);outline:none}
 .video-thumb:focus{outline:3px solid rgba(99,102,241,0.12)}
 
@@ -58,7 +56,7 @@ body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-s
   .profile-avatar{width:110px;height:110px}
   .business-name{font-size:1.4rem}
   .profile-top{gap:1.25rem}
-  .videos-grid{grid-template-columns:repeat(2,1fr)}
+  .videos-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 
 @media (min-width: 1024px){
