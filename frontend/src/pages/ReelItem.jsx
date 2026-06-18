@@ -15,7 +15,7 @@ const ReelItem = ({ videoUrl, description, onVisitStore }) => {
       <div className="reel-overlay">
         <div className="reel-bottom-gradient" />
         <div className="reel-meta">
-          <p className="reel-description">{description}</p>
+          <p className="reel-description">{`${description}...`}</p>
           <button className="reel-button" type="button" onClick={onVisitStore}>
             Visit Store
           </button>
