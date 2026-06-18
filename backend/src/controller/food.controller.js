@@ -25,7 +25,8 @@ export async function createFood(req, res) {
          fs.unlinkSync(req.file.path) // delete local file
         res.status(201).json({
             message: "Upload successful",
-            food: foodItem
+            food: foodItem,
+           foodPartner:foodItem.foodPartner
         });
 
     } catch (error) {
@@ -38,7 +39,8 @@ export async function getFoodItems(req, res) {
      const foodItems = await foodModel.find()
      return res.status(200).json({
       message:"food item fetch successfully",
-      foodItems
+      foodItems,
+
      })
    } catch (error) {
     return res.status(500).json({
