@@ -24,14 +24,14 @@ const ReelsFeed = () => {
          withCredentials: true,
          signal: controller.signal
         })
-        console.log('Fetched food items:', response.data)
         const items = Array.isArray(response.data.foodItems)
           ? response.data.foodItems
               .filter(food => Boolean(food.video))
               .map(food => ({
                 id: food._id || food.id,
                 videoUrl: food.video,
-                description: food.description || food.name || 'No description available'
+                description: food.description || food.name || 'No description available',
+                foodPartner: food.foodPartner 
               }))
           : []
 
@@ -88,11 +88,7 @@ const ReelsFeed = () => {
     }
   }, [reels])
 
-  const handleVisitStore = id => {
-    console.log('Visit store clicked for', id)
-    window.alert(`Visit store placeholder for ${id}`)
-  }
-
+  console.log('Current reels state:', reels)
   return (
     <main className="reels-feed" ref={feedRef}>
       {reels.map(item => (
@@ -100,7 +96,7 @@ const ReelsFeed = () => {
           key={item.id}
           videoUrl={item.videoUrl}
           description={item.description}
-          onVisitStore={() => handleVisitStore(item.id)}
+           itemId = {item.foodPartner}
         />
       ))}
     </main>

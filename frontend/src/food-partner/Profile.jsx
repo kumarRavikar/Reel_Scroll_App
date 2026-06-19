@@ -22,7 +22,7 @@ console.log("videos",videos)
           <div className="profile-top">
             <figure className="profile-avatar">
               <img
-                src={profile?.avatar || "profile image"}
+                src={profile?.avatar || "https://cyber.comolho.com/static/img/avatar.png"}
                 alt="Business profile image"
                 width="160"
                 height="160"
@@ -58,7 +58,7 @@ console.log("videos",videos)
                   <video
                     src={n.video}
                     alt={`Video thumbnail ${n.name}`}
-                     autoPlay
+                    
                       muted
                   />
                 </article>

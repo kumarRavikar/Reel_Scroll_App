@@ -1,6 +1,6 @@
-import React from 'react'
-
-const ReelItem = ({ videoUrl, description, onVisitStore }) => {
+import React from "react";
+import { Link } from "react-router-dom";
+const ReelItem = ({ videoUrl, description, itemId }) => {
   return (
     <article className="reel-item">
       <video
@@ -16,13 +16,18 @@ const ReelItem = ({ videoUrl, description, onVisitStore }) => {
         <div className="reel-bottom-gradient" />
         <div className="reel-meta">
           <p className="reel-description">{`${description}...`}</p>
-          <button className="reel-button" type="button" onClick={onVisitStore}>
-            Visit Store
-          </button>
+          {itemId && (
+            <Link 
+              to={`/food-partner/profile/${itemId}`}
+              className="reel-button"
+            >
+              Visit Store
+            </Link>
+          )}
         </div>
       </div>
     </article>
-  )
-}
+  );
+};
 
-export default ReelItem
+export default ReelItem;
