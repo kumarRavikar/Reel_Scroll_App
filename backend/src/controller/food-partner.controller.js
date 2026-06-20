@@ -15,7 +15,7 @@ export async function getFootPartnerById(req, res) {
     }
 
     const foodItems = await foodModel.find({
-      foodPartner: id,
+      foodPartner: id, // this search food created by foodPartner through foodPartner id
     }).lean();
     
     res.status(200).json({
