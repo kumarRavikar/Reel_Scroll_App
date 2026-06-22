@@ -4,6 +4,7 @@ import { LikeModel } from "../model/Likes.model.js";
 import FoodModel from "../model/foodItem.model.js"
 import { uploadfile } from "../services/storage.service.js";
 import fs from "fs"
+import saveModel from "../model/saved.model.js";
 export async function createFood(req, res) {
   try {
         const {name , description} = req.body
@@ -51,34 +52,74 @@ export async function getFoodItems(req, res) {
    }
 }
 export async function likeFood(req, res) {
-    const {foodId} = req.body
-    const user = req.user
-    const isAllreadyLiked = await LikeModel.findOne({
-      user: user._id, // store user id 
-      food:foodId 
-    })
-    if(isAllreadyLiked){
-      await LikeModel.deleteOne({
-        user:user._id,
-        food:foodId
-      })
-       await FoodModel.findByIdAndUpdate(foodId,{
-        $inc:{likeCount: - 1}
-       })
-      res.status(200).json({
-        message:"User unLike the post "
-      })
-    }
-
-   const like = await LikeModel.create({
-      user:user._id,
-      food:foodId
-    })
-     await FoodModel.findByIdAndUpdate(foodId,{
-      $inc:{likeCount: 1}
+   try {
+     const {foodId} = req.body
+     const user = req.user
+     const isAllreadyLiked = await LikeModel.findOne({
+       user: user._id, // store user id 
+       food:foodId 
      })
-    res.status(201).json({
-      message : "user Like a post !!..",
-      like
-    })
+     if(isAllreadyLiked){
+       await LikeModel.deleteOne({
+         user:user._id,
+         food:foodId
+       })
+        await FoodModel.findByIdAndUpdate(foodId,{
+         $inc:{likeCount: - 1}
+        })
+       res.status(200).json({
+         message:"User unLike the post "
+       })
+     }
+ 
+    const like = await LikeModel.create({
+       user:user._id,
+       food:foodId
+     })
+      await FoodModel.findByIdAndUpdate(foodId,{
+       $inc:{likeCount: 1}
+      })
+     res.status(201).json({
+       message : "user Like a post !!..",
+       like
+     })
+   } catch (error) {
+         res.status(500).json({
+          message:"Internal server error from " + error
+         })
+   }
 } 
+export async function saveFood(req, res) {
+   try {
+           const {foodId} = req.body
+           const user = req.user
+       const isAllreadySaved = await saveModel.findById({
+            user : user._id,
+            food: foodId
+           })
+           if(isAllreadySaved){
+              await saveModel.deleteOne({
+                user: user._id,
+                food: foodId
+              })
+
+              res.status(200).json({
+                message:"Food unsaved"
+              })
+           }
+
+         const save =  await saveModel.create({
+            user:user._id,
+            food:foodId
+           })
+           res.status(201).json({
+            Message:"food Saved ",
+              save
+           })
+
+   } catch (error) {
+     res.status(500).json({
+      message:"Internal server error from " + error
+     }) 
+   }
+}
