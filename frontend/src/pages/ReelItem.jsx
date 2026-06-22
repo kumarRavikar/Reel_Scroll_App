@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import {ReelActions} from "../components/ReelActions"
 const ReelItem = ({ videoUrl, description, itemId }) => {
   return (
     <article className="reel-item">
@@ -11,6 +12,7 @@ const ReelItem = ({ videoUrl, description, itemId }) => {
         playsInline
         preload="metadata"
       />
+      <ReelActions />
 
       <div className="reel-overlay">
         <div className="reel-bottom-gradient" />

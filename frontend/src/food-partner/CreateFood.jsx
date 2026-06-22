@@ -40,7 +40,7 @@ const CreateFood = () => {
       })
 
       console.log(response.data)
-      navigate('/food')
+      navigate('/home')
     } catch (error) {
       console.error(error)
     } finally {

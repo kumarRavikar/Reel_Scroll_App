@@ -38,12 +38,12 @@ console.log("videos",videos)
           <div className="profile-stats" aria-hidden="false">
             <div className="stat-card" role="region" aria-label="Total Meals">
               <span className="stat-label">Total Meals</span>
-              <span className="stat-value">{profile?.totalMeals || 1,254}</span>
+              <span className="stat-value">{profile?.totalMeals || 1254}</span>
             </div>
 
             <div className="stat-card" role="region" aria-label="Customers Served">
               <span className="stat-label">Customers Served</span>
-              <span className="stat-value">{profile?.customersServed || 9,872}</span>
+              <span className="stat-value">{profile?.customersServed || 9872}</span>
             </div>
           </div>
         </header>

@@ -3,6 +3,7 @@ import axios from 'axios'
 import ReelItem from './ReelItem'
 import "../styles/reels.css"
 
+
 const placeholderReels = [
   {
     id: 'placeholder-1',
@@ -90,16 +91,19 @@ const ReelsFeed = () => {
 
   console.log('Current reels state:', reels)
   return (
-    <main className="reels-feed" ref={feedRef}>
-      {reels.map(item => (
-        <ReelItem
-          key={item.id}
-          videoUrl={item.videoUrl}
-          description={item.description}
-           itemId = {item.foodPartner}
-        />
-      ))}
-    </main>
+    <>
+      <main className="reels-feed" ref={feedRef}>
+        {reels.map(item => (
+          <ReelItem
+            key={item.id}
+            videoUrl={item.videoUrl}
+            description={item.description}
+             itemId = {item.foodPartner}
+          />
+        ))}
+      </main>
+      
+    </>
   )
 }
 

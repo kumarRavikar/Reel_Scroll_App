@@ -1,0 +1,196 @@
+.reel-actions {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  align-items: center;
+  z-index: 2;
+}
+
+.reel-action {
+  width: 56px;
+  height: 56px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.92);
+  transition: transform 240ms ease, background 240ms ease, color 240ms ease, box-shadow 240ms ease;
+  cursor: pointer;
+  box-shadow: 0 24px 40px rgba(0, 0, 0, 0.18);
+}
+
+.reel-action svg {
+  width: 28px;
+  height: 28px;
+}
+
+.reel-action:hover {
+  transform: scale(1.12);
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.reel-action:active {
+  transform: scale(0.98);
+}
+
+.reel-action-like:hover,
+.reel-action-like:focus-visible {
+  color: #ff5a76;
+  background: rgba(255, 90, 118, 0.18);
+}
+
+.reel-action-comment:hover,
+.reel-action-comment:focus-visible {
+  color: #7fd1ff;
+  background: rgba(127, 209, 255, 0.18);
+}
+
+.reel-action-save:hover,
+.reel-action-save:focus-visible {
+  color: #ffd166;
+  background: rgba(255, 209, 102, 0.18);
+}
+
+.reel-meta {
+  padding-right: 120px;
+  max-width: calc(100% - 140px);
+}
+
+.reel-button {
+  margin-bottom: 150px;
+}
+
+.reels-feed {
+  padding-bottom: 150px;
+}
+
+.bottom-nav {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(380px, calc(100% - 28px));
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  border-radius: 30px;
+  background: rgba(10, 12, 18, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.28);
+  z-index: 999;
+}
+
+.bottom-nav-button {
+  width: 56px;
+  height: 56px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.92);
+  transition: transform 240ms ease, background 240ms ease, color 240ms ease, box-shadow 240ms ease;
+  cursor: pointer;
+}
+
+.bottom-nav-button svg {
+  width: 24px;
+  height: 24px;
+}
+
+.bottom-nav-button:hover {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  box-shadow: 0 16px 28px rgba(0, 0, 0, 0.2);
+}
+
+.bottom-nav-button:active {
+  transform: scale(0.96);
+}
+
+.bottom-nav-button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(125, 177, 255, 0.24);
+}
+
+@media (max-width: 640px) {
+  .reel-actions {
+    right: 14px;
+    gap: 20px;
+  }
+
+  .reel-action {
+    width: 52px;
+    height: 52px;
+  }
+
+  .reel-action svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .reel-meta {
+    padding-right: 90px;
+    max-width: calc(100% - 112px);
+  }
+
+  .reel-button {
+    margin-bottom: 120px;
+  }
+
+  .reels-feed {
+    padding-bottom: 160px;
+  }
+
+  .bottom-nav {
+    position: fixed;
+    left: 0;
+    width: 100vw;
+    transform: none;
+    bottom: 0;
+    padding: 12px 12px;
+    gap: 20px;
+    border-radius: 20px 20px 0 0;
+    background: rgba(10, 12, 18, 0.65);
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.28);
+  }
+
+  .bottom-nav-button {
+    width: 52px;
+    height: 52px;
+  }
+}
+
+@media (min-width: 900px) {
+  .reel-actions {
+    right: 24px;
+  }
+
+  .reel-meta {
+    padding-right: 140px;
+    max-width: calc(100% - 160px);
+  }
+
+  .reel-button {
+    margin-bottom: 170px;
+  }
+
+  .reels-feed {
+    padding-bottom: 170px;
+  }
+
+  .bottom-nav {
+    width: min(420px, calc(100% - 40px));
+    bottom: 18px;
+  }
+}
