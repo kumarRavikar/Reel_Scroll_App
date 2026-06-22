@@ -8,7 +8,10 @@ const placeholderReels = [
   {
     id: 'placeholder-1',
     videoUrl: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',
-    description: 'Loading reels, please wait while we fetch the latest video feed.'
+    description: 'Loading reels, please wait while we fetch the latest video feed.',
+    likeCount: 124,
+    commentCount: 18,
+    saveCount: 9
   }
 ]
 
@@ -32,7 +35,10 @@ const ReelsFeed = () => {
                 id: food._id || food.id,
                 videoUrl: food.video,
                 description: food.description || food.name || 'No description available',
-                foodPartner: food.foodPartner 
+                foodPartner: food.foodPartner,
+                likeCount: typeof food.likeCount === 'number' ? food.likeCount : food.likeCount?.length ?? 124,
+                commentCount: typeof food.comments === 'number' ? food.comments : food.comments?.length ?? 18,
+                saveCount: typeof food.saves === 'number' ? food.saves : food.saves?.length ?? 9
               }))
           : []
 
@@ -98,7 +104,10 @@ const ReelsFeed = () => {
             key={item.id}
             videoUrl={item.videoUrl}
             description={item.description}
-             itemId = {item.foodPartner}
+            itemId={item.foodPartner}
+            likeCount={item.likeCount}
+            commentCount={item.commentCount}
+            saveCount={item.saveCount}
           />
         ))}
       </main>

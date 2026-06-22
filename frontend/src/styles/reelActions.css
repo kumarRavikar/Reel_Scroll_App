@@ -10,6 +10,13 @@
   z-index: 2;
 }
 
+.reel-action-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
 .reel-action {
   width: 56px;
   height: 56px;
@@ -28,6 +35,13 @@
 .reel-action svg {
   width: 28px;
   height: 28px;
+}
+
+.reel-action-count {
+  color: rgba(255, 255, 255, 0.84);
+  font-size: 0.82rem;
+  line-height: 1.2;
+  text-shadow: 0 10px 20px rgba(0, 0, 0, 0.22);
 }
 
 .reel-action:hover {
