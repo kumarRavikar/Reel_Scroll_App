@@ -96,12 +96,39 @@ const ReelsFeed = () => {
   }, [reels])
 
   console.log('Current reels state:', reels)
+  const likeVideo = async (item) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:3000/api/food/like",
+      { foodId: item.id },
+      { withCredentials: true }
+    )
+     
+    setReels(prevReels =>
+      prevReels.map(reel => {
+        if (reel.id !== item.id) return reel
+        
+        return {
+          ...reel,
+          likeCount:
+            response.data.liked 
+              ? reel.likeCount + 1
+              :  Math.max(0, reel.likeCount - 1)
+        }
+      })
+    )
+       console.log('Like response:', response.data)
+  } catch (error) {
+    console.error("Like failed:", error)
+  }
+}
   return (
     <>
       <main className="reels-feed" ref={feedRef}>
         {reels.map(item => (
           <ReelItem
             key={item.id}
+            likeVideo={()=>likeVideo(item)}
             videoUrl={item.videoUrl}
             description={item.description}
             itemId={item.foodPartner}

@@ -2,11 +2,11 @@ import React from 'react'
 import { FaHeart, FaCommentDots, FaBookmark } from 'react-icons/fa'
 import '../styles/reelActions.css'
 
-export const ReelActions = ({ likes = 124, comments = 18, saves = 9 }) => {
+export const ReelActions = ({ likes , comments = 18, saves = 9 , onLike }) => {
   return (
     <div className="reel-actions">
       <div className="reel-action-group">
-        <button type="button" className="reel-action reel-action-like" aria-label="Like">
+        <button type="button" className="reel-action reel-action-like" aria-label="Like" onClick={onLike}>
           <FaHeart />
         </button>
         <span className="reel-action-count">{likes}</span>
