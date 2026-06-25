@@ -67,7 +67,7 @@ export async function likeFood(req, res) {
         await FoodModel.findByIdAndUpdate(foodId,{
          $inc:{likeCount: - 1}
         })
-       res.status(200).json({
+      return res.status(200).json({
          message:"User unLike the post "
        })
      }
@@ -79,9 +79,9 @@ export async function likeFood(req, res) {
       await FoodModel.findByIdAndUpdate(foodId,{
        $inc:{likeCount: 1}
       })
-     res.status(201).json({
+    return    res.status(201).json({
        message : "user Like a post !!..",
-       like
+       liked:true
      })
    } catch (error) {
          res.status(500).json({
