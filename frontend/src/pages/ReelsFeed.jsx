@@ -36,9 +36,10 @@ const ReelsFeed = () => {
                 videoUrl: food.video,
                 description: food.description || food.name || 'No description available',
                 foodPartner: food.foodPartner,
-                likeCount: typeof food.likeCount === 'number' ? food.likeCount : food.likeCount?.length ?? 124,
+                likeCount: typeof food.likeCount === 'number' ? food.likeCount : food.likeCount?.length ?? 0,
                 commentCount: typeof food.comments === 'number' ? food.comments : food.comments?.length ?? 18,
-                saveCount: typeof food.saves === 'number' ? food.saves : food.saves?.length ?? 9
+                saveCount: typeof food.saveCount === 'number' ? food.saveCount : food.saveCount?.length ?? 0,
+                
               }))
           : []
 
@@ -95,7 +96,6 @@ const ReelsFeed = () => {
     }
   }, [reels])
 
-  console.log('Current reels state:', reels)
   const likeVideo = async (item) => {
   try {
     const response = await axios.post(
@@ -117,9 +117,33 @@ const ReelsFeed = () => {
         }
       })
     )
-       console.log('Like response:', response.data)
   } catch (error) {
-    console.error("Like failed:", error)
+    return error.response?.data?.message || "An error occurred while liking the food item."
+  }
+}
+const toggleBookMark = async (item) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:3000/api/food/save",
+      { foodId: item.id },
+      { withCredentials: true }
+    )
+
+    setReels(prevReels =>
+      prevReels.map(reel => {
+        if (reel.id !== item.id) return reel
+
+        return {
+          ...reel,
+          saveCount: response.data.saveCount,
+          isSaved: response.data.saved 
+        }
+      })
+    )
+
+  
+  } catch (error) {
+    return error.response?.data?.message || "An error occurred while saving the food item."
   }
 }
   return (
@@ -129,6 +153,7 @@ const ReelsFeed = () => {
           <ReelItem
             key={item.id}
             likeVideo={()=>likeVideo(item)}
+            saveVideo={()=>toggleBookMark(item)}
             videoUrl={item.videoUrl}
             description={item.description}
             itemId={item.foodPartner}
