@@ -7,7 +7,7 @@ const foodItemSchema = new mongoose.Schema({
   description:{type:String},
   foodPartner:{type:mongoose.Schema.Types.ObjectId, ref:"foodpartner"},// this stablish connection between two collection
   likeCount:{type:Number, default:0},
-  
+  saveCount:{type:Number, default:0},
 })
 
 

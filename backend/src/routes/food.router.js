@@ -7,5 +7,5 @@ const foodRouters = express.Router()
 foodRouters.post("/",authFoodPartnerMiddleware,upload.single("video"),createFood) //only authroized food partner is able to create a food 
 foodRouters.get("/",authUserFoodMiddleware,getFoodItems)  // get all foods only for authorized users
 foodRouters.post("/like",authUserFoodMiddleware,likeFood)
-foodRouters.post("/save", authFoodPartnerMiddleware, saveFood)
+foodRouters.post("/save", authUserFoodMiddleware, saveFood)
 export default foodRouters

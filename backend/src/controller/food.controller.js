@@ -91,9 +91,9 @@ export async function likeFood(req, res) {
 } 
 export async function saveFood(req, res) {
    try {
-           const {foodId} = req.body
+           const {foodId} = req.body // extract id from frontend
            const user = req.user
-       const isAllreadySaved = await saveModel.findById({
+       const isAllreadySaved = await saveModel.findOne({
             user : user._id,
             food: foodId
            })
@@ -102,19 +102,27 @@ export async function saveFood(req, res) {
                 user: user._id,
                 food: foodId
               })
-
-              res.status(200).json({
-                message:"Food unsaved"
+             const updatedFood =   await foodModel.findByIdAndUpdate(foodId,{
+                $inc:{saveCount: - 1 }
+              },{new:true})
+             return res.status(200).json({
+                message:"Food item unsaved",
+                saved: false,
+                saveCount: updatedFood.saveCount
               })
            }
 
-         const save =  await saveModel.create({
+           const save =  await saveModel.create({
             user:user._id,
             food:foodId
            })
-           res.status(201).json({
-            Message:"food Saved ",
-              save
+           const updatedFood =  await foodModel.findByIdAndUpdate(foodId,{
+              $inc:{saveCount: 1}
+            },{new:true})
+            return res.status(201).json({
+            Message:"food item Saved ",
+              saved : true,
+              saveCount : updatedFood.saveCount
            })
 
    } catch (error) {
