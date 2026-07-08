@@ -16,7 +16,7 @@ const UserLogin = () => {
        )
        navigate('/home');
      } catch (error) {
-        return alert(error.response?.data?.message || error.message) //see real backend error
+        return alert(error.response?.data?.message || error.message) //see real backend error come from backend
      }
   }
   return (
