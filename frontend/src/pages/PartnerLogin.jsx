@@ -9,7 +9,7 @@ const PartnerLogin = () => {
        const email = e.target.email.value;
        const password = e.target.password.value;
        try{
-          await axios.post("http://localhost:3000/api/food-partner/login",
+          await axios.post("https://reel-scroll-app.onrender.com/api/food-partner/login",
          {email,password},{
            withCredentials:true
          }

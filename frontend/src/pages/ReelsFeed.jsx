@@ -24,7 +24,7 @@ const ReelsFeed = () => {
 
     const fetchReels = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/food', {
+        const response = await axios.get('https://reel-scroll-app.onrender.com/api/food', {
          withCredentials: true,
          signal: controller.signal
         })
@@ -99,7 +99,7 @@ const ReelsFeed = () => {
   const likeVideo = async (item) => {
   try {
     const response = await axios.post(
-      "http://localhost:3000/api/food/like",
+      "https://reel-scroll-app.onrender.com/api/food/like",
       { foodId: item.id },
       { withCredentials: true }
     )
@@ -124,7 +124,7 @@ const ReelsFeed = () => {
 const toggleBookMark = async (item) => {
   try {
     const response = await axios.post(
-      "http://localhost:3000/api/food/save",
+      "https://reel-scroll-app.onrender.com/api/food/save",
       { foodId: item.id },
       { withCredentials: true }
     )

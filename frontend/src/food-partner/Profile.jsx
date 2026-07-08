@@ -8,7 +8,7 @@ const Profile = () => {
   const [videos, setVideos] = useState([]);
   
  useEffect(()=>{
-   axios.get(`http://localhost:3000/api/food-partner/profile/${id}`, {withCredentials: true}).then((res)=>{
+   axios.get(`https://reel-scroll-app.onrender.com/api/food-partner/profile/${id}`, {withCredentials: true}).then((res)=>{
     setProfile(res.data.foodPartner)
     setVideos(res.data.foodPartner.foodItems)
    })

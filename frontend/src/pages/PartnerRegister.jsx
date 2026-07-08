@@ -13,7 +13,7 @@ const PartnerRegister = () => {
        const phoneNo = e.target.phoneNo.value;
        const address = e.target.address.value;
      try {
-        await axios.post("http://localhost:3000/api/food-partner/register",
+        await axios.post("https://reel-scroll-app.onrender.com/api/food-partner/register",
          { businessName,email,password,contactName,phoneNo,address },
        {withCredentials:true}
      );

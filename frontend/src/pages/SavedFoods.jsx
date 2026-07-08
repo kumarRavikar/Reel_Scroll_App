@@ -12,7 +12,7 @@ const SavedFoods = () => {
       setLoading(true);
 
       try {
-        const response = await axios.get("http://localhost:3000/api/food/saved", {
+        const response = await axios.get("https://reel-scroll-app.onrender.com/api/food/saved", {
           withCredentials: true,
         });
        
