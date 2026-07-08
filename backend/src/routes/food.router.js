@@ -1,5 +1,5 @@
 import express from "express"
-import { createFood, getFoodItems, likeFood, saveFood } from "../controller/food.controller.js"
+import { createFood, getAllSavedFood, getFoodItems, likeFood, saveFood } from "../controller/food.controller.js"
 import { authFoodPartnerMiddleware, authUserFoodMiddleware } from "../middlewares/auth.middleware.js"
 import multer from "multer"
 const foodRouters = express.Router()
@@ -8,4 +8,5 @@ foodRouters.post("/",authFoodPartnerMiddleware,upload.single("video"),createFood
 foodRouters.get("/",authUserFoodMiddleware,getFoodItems)  // get all foods only for authorized users
 foodRouters.post("/like",authUserFoodMiddleware,likeFood)
 foodRouters.post("/save", authUserFoodMiddleware, saveFood)
+foodRouters.get("/saved",authUserFoodMiddleware,getAllSavedFood)
 export default foodRouters
