@@ -8,7 +8,7 @@ import cors from "cors";
 dotenv.config()
 const app = express()
 app.use(cors({
-    origin:"https://reelscrollappfrontend.vercel.app",
+    origin:"https://reel-scroll-app.vercel.app/",
     credentials:true
 }))
 
