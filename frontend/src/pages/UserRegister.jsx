@@ -14,7 +14,7 @@ const UserRegister = () => {
     const password = e.target.password.value;
 
     await axios.post(
-      "http://localhost:3000/api/user/register",
+      "https://reel-scroll-app.onrender.com/api/user/register",
       { fullName: name, email, password },
       { withCredentials: true }
     );
