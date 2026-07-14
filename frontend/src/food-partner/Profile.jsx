@@ -32,6 +32,7 @@ console.log("videos",videos)
             <div className="profile-info">
               <h1 className="business-name">{profile?.businessName}</h1>
               <p className="business-address">{profile?.address}</p>
+              <button>Logout</button>
             </div>
           </div>
 
