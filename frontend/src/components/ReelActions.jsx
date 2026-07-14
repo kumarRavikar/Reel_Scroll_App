@@ -1,8 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { FaHeart, FaCommentDots, FaBookmark } from 'react-icons/fa'
 import '../styles/reelActions.css'
 
-export const ReelActions = ({ likes , comments = 18, saves = 0 , onLike, onSave }) => {
+export const ReelActions = ({ likes , comments = 18, saves = 0 , onLike, onSave, foodId }) => {
   return (
     <div className="reel-actions">
       <div className="reel-action-group">
@@ -11,12 +12,14 @@ export const ReelActions = ({ likes , comments = 18, saves = 0 , onLike, onSave 
         </button>
         <span className="reel-action-count">{likes}</span>
       </div>
-      <div className="reel-action-group">
-        <button type="button" className="reel-action reel-action-comment" aria-label="Comment">
-          <FaCommentDots />
-        </button>
-        <span className="reel-action-count">{comments}</span>
-      </div>
+      <Link to={{ pathname: '/comments', state: { foodId } }}>
+        <div className="reel-action-group">
+          <button type="button" className="reel-action reel-action-comment" aria-label="Comment">
+            <FaCommentDots />
+          </button>
+          <span className="reel-action-count">{comments}</span>
+        </div>
+      </Link>
       <div className="reel-action-group">
         <button type="button" className="reel-action reel-action-save" aria-label="Save" onClick={onSave}>
           <FaBookmark />

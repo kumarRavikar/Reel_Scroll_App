@@ -157,6 +157,7 @@ const toggleBookMark = async (item) => {
             videoUrl={item.videoUrl}
             description={item.description}
             itemId={item.foodPartner}
+            foodId={item.id}
             likeCount={item.likeCount}
             commentCount={item.commentCount}
             saveCount={item.saveCount}
