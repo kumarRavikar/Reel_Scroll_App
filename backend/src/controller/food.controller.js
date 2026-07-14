@@ -5,6 +5,7 @@ import { uploadfile } from "../services/storage.service.js";
 import fs from "fs";
 import saveModel from "../model/saved.model.js";
 import commentModel from "../model/comment.model.js";
+import UserModel from "../model/user.model.js";
 export async function createFood(req, res) {
   try {
     const { name, description } = req.body;
@@ -170,7 +171,7 @@ export async function getAllSavedFood(req, res) {
     })
   }
 }
-export async function addComment(rreq, res){
+export async function addComment(req, res){
    try {
         const {foodId, text} = req.body;
 
@@ -178,19 +179,28 @@ export async function addComment(rreq, res){
           return res.status(401).json({message:"Unauthorized"})
         }
          
-        if(!text){
+        if(!text || !text.trim()){
           return res.status(400).json({
-            message:"Comment can not be empety!!"
+            message:"Comment can not be empty!!"
           })
         }
+
         const comment = await commentModel.create({
           user : req.user._id,
           food: foodId,
-          text,
+          text: text.trim(),
         })
+
+        const count = await commentModel.countDocuments({food:foodId})
+        await foodModel.findByIdAndUpdate(foodId,{
+          $inc:{commentCount: count}
+        })
+
+        const populatedComment = await commentModel.findById(comment._id).populate("user", "_id fullName email")
+
         return res.status(201).json({
           message: "User commented successfully",
-          comment
+          comment: populatedComment
         })
    } catch (error) {
      res.status(500).json({
@@ -198,10 +208,11 @@ export async function addComment(rreq, res){
      })
    }
 }
+
 export async function getAllComment(req, res){
    try {
        const {foodId} = req.params
-       const comments = await commentModel.find({food:foodId}).populate("User").sort({createdAt: -1})
+       const comments = await commentModel.find({food:foodId}).populate("user").sort({createdAt: -1})
        return res.status(200).json({
         message: "get All comments ",
         comments
@@ -211,4 +222,46 @@ export async function getAllComment(req, res){
       message:"Internal server Error from Add comment--" + error
      })
    }
+}
+
+export async function deleteComment(req, res) {
+  try {
+    const { id } = req.params
+
+    if (!req.user) {
+      return res.status(401).json({ message: "Unauthorized" })
+    }
+
+    const comment = await commentModel.findById(id)
+    if (!comment) {
+      return res.status(404).json({ message: "Comment not found" })
+    }
+
+    if (comment.user.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ message: "You can only delete your own comments" })
+    }
+
+    await comment.deleteOne()
+    const count = await commentModel.countDocuments({ food: comment.food })
+    await foodModel.findByIdAndUpdate(comment.food, {
+      $inc: { commentCount: count }
+    })
+
+    return res.status(200).json({ message: "Comment deleted successfully" })
+  } catch (error) {
+    return res.status(500).json({ message: `Internal server error from deleteComment: ${error.message}` })
+  }
+}
+
+export async function getCurrentUser(req, res) {
+  try {
+    if (!req.user) {
+      return res.status(401).json({ message: "Unauthorized" })
+    }
+
+    const user = await UserModel.findById(req.user._id).select("_id fullName email")
+    return res.status(200).json({ message: "Current user fetched", user })
+  } catch (error) {
+    return res.status(500).json({ message: `Internal server error from getCurrentUser: ${error.message}` })
+  }
 }
