@@ -13,8 +13,17 @@ const Profile = () => {
     setVideos(res.data.foodPartner.foodItems)
    })
  },[id])
-console.log("profile",profile)
-console.log("videos",videos)
+       const handleLogOut = async()=>{
+           try{
+            await axios.post("https://reel-scroll-app.onrender.com/api/user/logout",{},{
+              withCredentials:true
+            })
+            alert("Logout successful")
+            window.location.href = "/login"
+           }catch(err){
+              console.log("Error occurred while logging out:", err)
+           }
+   }
   return (
     <div className="profile-page">
       <div className="container">
@@ -32,7 +41,9 @@ console.log("videos",videos)
             <div className="profile-info">
               <h1 className="business-name">{profile?.businessName}</h1>
               <p className="business-address">{profile?.address}</p>
-              <button className="logout-button">Logout</button>
+              <button className="logout-button" onClick={handleLogOut}>
+                Logout
+              </button>
             </div>
           </div>
 
