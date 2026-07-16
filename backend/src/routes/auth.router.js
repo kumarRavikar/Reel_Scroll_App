@@ -7,7 +7,7 @@ const router = express.Router()
 // router for  user
 router.post("/user/register",registerUser)
 router.post("/user/login",login)
-router.get("/user/logout",logout)
+router.post("/user/logout",logout)
 
 
 //Router for Food Partner
