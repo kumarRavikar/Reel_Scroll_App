@@ -1,29 +1,34 @@
-import React ,{useState, useEffect} from 'react'
-import '../styles/profile.css'
-import axios from 'axios'
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import "../styles/profile.css";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 const Profile = () => {
-  const {id} = useParams();
+  const { id } = useParams();
   const [profile, setProfile] = useState(null);
   const [videos, setVideos] = useState([]);
-  
- useEffect(()=>{
-   axios.get(`https://reel-scroll-app.onrender.com/api/food-partner/profile/${id}`, {withCredentials: true}).then((res)=>{
-    setProfile(res.data.foodPartner)
-    setVideos(res.data.foodPartner.foodItems)
-   })
- },[id])
-       const handleLogOut = async()=>{
-           try{
-            await axios.get("https://reel-scroll-app.onrender.com/api/user/logout",{
-              withCredentials:true
-            })
-            alert("Logout successful")
-            window.location.href = "/login"
-           }catch(err){
-              console.log("Error occurred while logging out:", err)
-           }
-   }
+
+  useEffect(() => {
+    axios
+      .get(
+        `https://reel-scroll-app.onrender.com/api/food-partner/profile/${id}`,
+        { withCredentials: true },
+      )
+      .then((res) => {
+        setProfile(res.data.foodPartner);
+        setVideos(res.data.foodPartner.foodItems);
+      });
+  }, [id]);
+  const handleLogOut = async () => {
+    try {
+      await axios.get("https://reel-scroll-app.onrender.com/api/user/logout", {
+        withCredentials: true,
+      });
+      alert("Logout successful");
+      window.location.href = "/login";
+    } catch (err) {
+      console.log("Error occurred while logging out:", err);
+    }
+  };
   return (
     <div className="profile-page">
       <div className="container">
@@ -31,7 +36,10 @@ const Profile = () => {
           <div className="profile-top">
             <figure className="profile-avatar">
               <img
-                src={profile?.avatar || "https://cyber.comolho.com/static/img/avatar.png"}
+                src={
+                  profile?.avatar ||
+                  "https://cyber.comolho.com/static/img/avatar.png"
+                }
                 alt="Business profile image"
                 width="160"
                 height="160"
@@ -53,9 +61,15 @@ const Profile = () => {
               <span className="stat-value">{profile?.totalMeals || 1254}</span>
             </div>
 
-            <div className="stat-card" role="region" aria-label="Customers Served">
+            <div
+              className="stat-card"
+              role="region"
+              aria-label="Customers Served"
+            >
               <span className="stat-label">Customers Served</span>
-              <span className="stat-value">{profile?.customersServed || 9872}</span>
+              <span className="stat-value">
+                {profile?.customersServed || 9872}
+              </span>
             </div>
           </div>
         </header>
@@ -70,8 +84,7 @@ const Profile = () => {
                   <video
                     src={n.video}
                     alt={`Video thumbnail ${n.name}`}
-                    
-                      muted
+                    muted
                   />
                 </article>
               ))}
@@ -80,7 +93,7 @@ const Profile = () => {
         </main>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Profile
+export default Profile;
