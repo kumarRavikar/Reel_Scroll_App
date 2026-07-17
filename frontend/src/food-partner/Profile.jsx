@@ -15,7 +15,7 @@ const Profile = () => {
  },[id])
        const handleLogOut = async()=>{
            try{
-            await axios.post("https://reel-scroll-app.onrender.com/api/user/logout",{},{
+            await axios.get("https://reel-scroll-app.onrender.com/api/user/logout",{
               withCredentials:true
             })
             alert("Logout successful")
