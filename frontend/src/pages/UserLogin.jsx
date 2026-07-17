@@ -29,9 +29,9 @@ const UserLogin = () => {
     title="Welcome back"
     subtitle="Login to continue ordering your favorite meals."
     showName={false}
-    submitLabel="Login"
+    submitLabel={loading ? "Logging in..." : "Login"}
     bottomText="Don't have an account?"
-    bottomLinkText={loading ? "Logging in..." : "logIn"}
+    bottomLinkText="Register"
     bottomLinkTo="/user/register"
     onSubmit={handleSubmit}
   /></>

@@ -34,9 +34,9 @@ const UserRegister = () => {
         title="Create your account"
         subtitle="Register as a food customer and start exploring meals."
         showName
-        submitLabel="Register"
+        submitLabel={loading ? "Registering..." : "Register"}
         bottomText="Already have an account?"
-        bottomLinkText={loading ? "Creating account..." : "Register"}
+        bottomLinkText="Login"
         bottomLinkTo="/user/login"
         onSubmit={handleSubmit}
       />
