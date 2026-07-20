@@ -183,7 +183,10 @@ const Comments = () => {
           ref={inputRef}
           className="comments-input"
           value={commentText}
-          onChange={(event) => setCommentText(event.target.value)}
+          onChange={(event) => {
+            console.log("Typing:", event.target.value)
+            setCommentText(event.target.value)
+          }}
           placeholder="Add a comment..."
           maxLength={240}
         />
