@@ -9,7 +9,7 @@ const Comments = () => {
   const location = useLocation()
   const inputRef = useRef(null)
 
- const foodId = useMemo(() => {
+ const foodId = useMemo(() => { // extraction foodId that was passed from ReelActions.jsx to Comments.jsx using Link state or query parameter
   return (
     location.state?.foodId ||
     new URLSearchParams(location.search).get("foodId") ||
