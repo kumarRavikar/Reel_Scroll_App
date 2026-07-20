@@ -9,9 +9,13 @@ const Comments = () => {
   const location = useLocation()
   const inputRef = useRef(null)
 
-  const foodId = useMemo(() => {
-    return location.state?.foodId || location.search?.split('foodId=')?.[1] || ''
-  }, [location])
+ const foodId = useMemo(() => {
+  return (
+    location.state?.foodId ||
+    new URLSearchParams(location.search).get("foodId") ||
+    ''
+  )
+}, [location])
 
   const [comments, setComments] = useState([])
   const [commentText, setCommentText] = useState('')
@@ -85,6 +89,9 @@ const Comments = () => {
 
     if (!commentText.trim() || !foodId) return
   console.log("Form Submitted 🚀") // ADD THIS
+   console.log("foodId:", foodId)
+  console.log("commentText:", commentText)
+
   if (!commentText.trim() || !foodId) {
     console.log("Blocked ❌", { commentText, foodId })
     return
