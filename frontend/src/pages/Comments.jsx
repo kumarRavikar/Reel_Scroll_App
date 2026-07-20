@@ -16,7 +16,7 @@ const Comments = () => {
     ''
   )
 }, [location])
-
+  console.log("foodId:", foodId) // ADD THIS
   const [comments, setComments] = useState([])
   const [commentText, setCommentText] = useState('')
   const [loading, setLoading] = useState(true)
