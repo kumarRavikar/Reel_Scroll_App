@@ -37,7 +37,7 @@ const ReelsFeed = () => {
                 description: food.description || food.name || 'No description available',
                 foodPartner: food.foodPartner,
                 likeCount: typeof food.likeCount === 'number' ? food.likeCount : food.likeCount?.length ?? 0,
-                commentCount: typeof food.comments === 'number' ? food.comments : food.comments?.length ?? 18,
+                commentCount: typeof food.comments === 'number' ? food.comments : food.comments?.length ?? 0,
                 saveCount: typeof food.saveCount === 'number' ? food.saveCount : food.saveCount?.length ?? 0,
                 
               }))

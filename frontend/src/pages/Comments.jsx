@@ -65,7 +65,7 @@ const Comments = () => {
   useEffect(() => {
     const fetchCurrentUser = async () => {
       try {
-        const response = await axios.get('https://reel-scroll-app.onrender.com/api/user/me', { withCredentials: true })
+        const response = await axios.get('https://reel-scroll-app.onrender.com/api/food/me', { withCredentials: true })
         setCurrentUserId(response?.data?.user?._id || response?.data?.user?.id || '')
       } catch (err) {
         console.error('Unable to resolve current user:', err)

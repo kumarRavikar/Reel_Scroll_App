@@ -40,7 +40,7 @@ const UserRegister = () => {
         bottomLinkTo="/user/login"
         onSubmit={handleSubmit}
       />
-      console.log("UserRegister component rendered"); // Debugging statement
+     
     </>
   );
 };
