@@ -84,7 +84,11 @@ const Comments = () => {
     event.preventDefault()
 
     if (!commentText.trim() || !foodId) return
-
+  console.log("Form Submitted 🚀") // ADD THIS
+  if (!commentText.trim() || !foodId) {
+    console.log("Blocked ❌", { commentText, foodId })
+    return
+  }
     try {
       setSubmitting(true)
       setError('')
