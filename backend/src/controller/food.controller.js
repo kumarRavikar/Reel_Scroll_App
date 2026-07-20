@@ -188,12 +188,12 @@ export async function addComment(req, res){
         const comment = await commentModel.create({
           user : req.user._id,
           food: foodId,
-          text: text.trim(),
+          comment: text.trim(),
         })
 
         const count = await commentModel.countDocuments({food:foodId})
         await foodModel.findByIdAndUpdate(foodId,{
-          $inc:{commentCount: count}
+          $set:{commentCount: count}
         })
 
         const populatedComment = await commentModel.findById(comment._id).populate("user", "_id fullName email")
@@ -244,7 +244,7 @@ export async function deleteComment(req, res) {
     await comment.deleteOne()
     const count = await commentModel.countDocuments({ food: comment.food })
     await foodModel.findByIdAndUpdate(comment.food, {
-      $inc: { commentCount: count }
+      $set: { commentCount: count }
     })
 
     return res.status(200).json({ message: "Comment deleted successfully" })
