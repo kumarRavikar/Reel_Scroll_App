@@ -182,7 +182,7 @@ const Comments = () => {
 
       {error ? <div className="comments-status">{error}</div> : null}
 
-      <form className="comments-input-bar" onSubmit={handleSubmit}>
+      <form className="comments-input-bar">
         <input
           ref={inputRef}
           className="comments-input"
@@ -194,7 +194,7 @@ const Comments = () => {
           placeholder="Add a comment..."
           maxLength={240}
         />
-        <button type="submit" className="comments-submit" disabled={submitting || !commentText.trim()}>
+        <button type="button" className="comments-submit" disabled={submitting || !commentText.trim()} onClick={handleSubmit}>
           {submitting ? 'Posting...' : 'Post'}
         </button>
       </form>
