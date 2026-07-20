@@ -12,7 +12,7 @@ export const ReelActions = ({ likes , comments = 18, saves = 0 , onLike, onSave,
         </button>
         <span className="reel-action-count">{likes}</span>
       </div>
-      <Link to={{ pathname: '/comments', state: { foodId } }}>
+      <Link  to="/comments" state={{ foodId }}>
         <div className="reel-action-group">
           <button type="button" className="reel-action reel-action-comment" aria-label="Comment">
             <FaCommentDots />
